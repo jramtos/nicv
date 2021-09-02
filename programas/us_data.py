@@ -65,6 +65,8 @@ def get_us_data():
                           values='nicv').reset_index()
     states = states[states['date'] > end - dt.timedelta(days=367)]
     states.to_csv('2-1-NICV-Estados-USA.csv', index=False)
+    print('Estados de USA')
+    print(states)
 
     # Counties
     big = big[big.County != 'Unassigned']
@@ -80,6 +82,8 @@ def get_us_data():
         index='date', columns='Combined_Key', values='nicv').reset_index()
     counties = counties[counties['date'] > end - dt.timedelta(days=367)]
     counties.to_csv('2-1-NICV-Counties-USA.csv', index=False)
+    print('Counties de USA')
+    print(counties)
 
 
 if __name__ == "__main__":
