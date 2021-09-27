@@ -51,6 +51,7 @@ def get_data():
     global_csv_final.columns = global_csv_final.columns.droplevel()
     global_csv_final.reset_index(inplace=True)
     global_csv_final.columns.name = ''
+    global_csv_final = global_csv_final.round(4)
 
     # Guardar archivo como csv
     global_csv_final.to_csv('1-1-NICV-World.csv', index=False)
