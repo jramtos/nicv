@@ -49,7 +49,7 @@ def get_mex_data():
                                                          columns='location',
                                                          values='nicv').reset_index()
     municipios = municipios[municipios['date'] >
-                            dt.datetime.today() - dt.timedelta(days=367)]
+                            dt.datetime.today() - dt.timedelta(days=368)]
     municipios.to_csv('3-20-1-NICV-Municipios-México.csv', index=False)
     print('Municipios')
     print(municipios)
@@ -68,7 +68,7 @@ def get_mex_data():
                                                      columns='state',
                                                      values='nicv').reset_index()
     states = states[states['date'] >
-                    dt.datetime.today() - dt.timedelta(days=367)]
+                    dt.datetime.today() - dt.timedelta(days=368)]
     states.to_csv('3-1-NICV-Estados-México.csv', index=False)
     print('Estados de Mexico')
     print(states)

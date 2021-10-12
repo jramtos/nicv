@@ -30,7 +30,7 @@ def get_can_data():
 
     # Filtrar solo fechas de interes
     can_regions = can_regions[can_regions.date >
-                              dt.datetime.today() - dt.timedelta(days=367)]
+                              dt.datetime.today() - dt.timedelta(days=368)]
 
     can_regions.to_csv('4-1-NICV-Estados-Canadá.csv', index=False)
     print(can_regions)
