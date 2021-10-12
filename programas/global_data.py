@@ -2,10 +2,18 @@
 
 # Author: Jesica Ramirez
 
+import os
+customer_lib_dir = '/home/customer/lib'
+if os.path.isdir(customer_lib_dir):
+    import sys
+    sys.path.insert(0, '/home/customer/lib')
+
 import requests
 import pandas as pd
 import io
 import datetime as dt
+
+OUTPUT_DIRECTORY = os.path.join(os.pardir, "archivos")
 
 GLOBAL_BIWEEKLY = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/biweekly_cases_per_million.csv'
 
@@ -54,12 +62,13 @@ def get_data():
     global_csv_final = global_csv_final.round(4)
 
     # Guardar archivo como csv
-    global_csv_final.to_csv('1-1-NICV-World.csv', index=False)
+    output_file_path = os.path.join(OUTPUT_DIRECTORY, '1-1-NICV-World.csv')
+    global_csv_final.to_csv(output_file_path, index=False)
 
     # Print result
-    print('Data has: {} rows and {} columns'.format(
-        global_csv_final.shape[0], global_csv_final.shape[1]))
-    print(global_csv_final)
+    # print('Data has: {} rows and {} columns'.format(
+    #     global_csv_final.shape[0], global_csv_final.shape[1]))
+    # print(global_csv_final)
 
 
 if __name__ == "__main__":
