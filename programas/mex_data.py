@@ -21,7 +21,11 @@ CLAVES_ENTIDADES = {1: 'Aguascalientes', 2: 'Baja California', 3: 'Baja Californ
 def get_mex_data():
 
     # Bajar los datos
-    today_minus_1 = dt.datetime.today() - dt.timedelta(days=1)
+    if dt.datetime.now().hour >= 21:
+        days = 0
+    else:
+        days = 1
+    today_minus_1 = dt.datetime.today() - dt.timedelta(days=days)
     r = requests.get(MEX_URL.format(today_minus_1.strftime('%Y%m%d')))
     mex = pd.read_csv(io.StringIO(r.content.decode('utf-8')))
 
@@ -49,7 +53,7 @@ def get_mex_data():
                                                          columns='location',
                                                          values='nicv').reset_index()
     municipios = municipios[municipios['date'] >
-                            dt.datetime.today() - dt.timedelta(days=368)]
+                            dt.datetime.today() - dt.timedelta(days=367)]
     municipios.to_csv('3-20-1-NICV-Municipios-México.csv', index=False)
     print('Municipios')
     print(municipios)
@@ -68,7 +72,7 @@ def get_mex_data():
                                                      columns='state',
                                                      values='nicv').reset_index()
     states = states[states['date'] >
-                    dt.datetime.today() - dt.timedelta(days=368)]
+                    dt.datetime.today() - dt.timedelta(days=367)]
     states.to_csv('3-1-NICV-Estados-México.csv', index=False)
     print('Estados de Mexico')
     print(states)

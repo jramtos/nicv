@@ -14,10 +14,11 @@ def get_us_data():
     # Establecer Fechas (Hoy hasta menos un año)
     end = dt.datetime.today()
     step = dt.timedelta(days=1)
-    start = end - dt.timedelta(days=383)
+    start = end - dt.timedelta(days=369+15)
     dates = []
     while start < end:
         dates.append(start.strftime('%m-%d-%Y'))
+        print(start.strftime('%m-%d-%Y'))
         start += step
 
     # Bajar cada hoja de información
@@ -62,7 +63,7 @@ def get_us_data():
     states['nicv'] = states['last14']/states['POP']*1000
     states = states.pivot(index='date', columns='State',
                           values='nicv').reset_index()
-    states = states[states['date'] > end - dt.timedelta(days=368)]
+    states = states[states['date'] > end - dt.timedelta(days=369)]
     states.to_csv('2-1-NICV-Estados-USA.csv', index=False)
     print('Estados de USA')
     print(states)
@@ -79,7 +80,7 @@ def get_us_data():
     counties['nicv'] = counties['last14']/counties['POP']*1000
     counties = counties.pivot(
         index='date', columns='Combined_Key', values='nicv').reset_index()
-    counties = counties[counties['date'] > end - dt.timedelta(days=368)]
+    counties = counties[counties['date'] > end - dt.timedelta(days=369)]
     counties.to_csv('2-1-NICV-Counties-USA.csv', index=False)
     print('Counties de USA')
     print(counties)
