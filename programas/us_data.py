@@ -18,7 +18,6 @@ def get_us_data():
     dates = []
     while start < end:
         dates.append(start.strftime('%m-%d-%Y'))
-        print(start.strftime('%m-%d-%Y'))
         start += step
 
     # Bajar cada hoja de información
