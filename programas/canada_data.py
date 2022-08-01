@@ -2,10 +2,18 @@
 
 # Author: Jesica Ramirez
 
+import os
+customer_lib_dir = '/home/customer/lib'
+if os.path.isdir(customer_lib_dir):
+    import sys
+    sys.path.insert(0, '/home/customer/lib')
+
 import requests
 import pandas as pd
 import datetime as dt
 import io
+
+OUTPUT_DIRECTORY = os.path.join(os.pardir, "archivos")
 
 CANADA_URL = 'https://health-infobase.canada.ca/src/data/covidLive/covid19-download.csv'
 
@@ -32,8 +40,9 @@ def get_can_data():
     can_regions = can_regions[can_regions.date >
                               dt.datetime.today() - dt.timedelta(days=368)]
 
-    can_regions.to_csv('4-1-NICV-Estados-Canadá.csv', index=False)
-    print(can_regions)
+    output_file_path = os.path.join(OUTPUT_DIRECTORY, '4-1-NICV-Estados-Canadá.csv')
+    can_regions.to_csv(output_file_path, index=False)
+    #print(can_regions)
 
 
 if __name__ == "__main__":

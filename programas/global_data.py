@@ -12,6 +12,13 @@ if os.path.isdir(customer_lib_dir):
     import sys
     sys.path.insert(0, '/home/customer/lib')
 
+customer_lib_dir = '/home/customer/lib'
+if os.path.isdir(customer_lib_dir):
+    import sys
+    sys.path.insert(0, '/home/customer/lib')
+
+
+OUTPUT_DIRECTORY = os.path.join(os.pardir, "archivos")
 
 OUTPUT_DIRECTORY = os.path.join(os.pardir, "archivos")
 
@@ -64,6 +71,11 @@ def get_data():
     # Guardar archivo como csv
     global_csv_final.to_csv(os.path.join(OUTPUT_DIRECTORY, '1-1-NICV-World.csv'),
                             index=False)
+
+    # Print result
+    # print('Data has: {} rows and {} columns'.format(
+    #     global_csv_final.shape[0], global_csv_final.shape[1]))
+    # print(global_csv_final)
 
 
 if __name__ == "__main__":

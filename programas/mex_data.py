@@ -2,10 +2,18 @@
 
 # Author: Jesica Ramirez
 
+import os
+customer_lib_dir = '/home/customer/lib'
+if os.path.isdir(customer_lib_dir):
+    import sys
+    sys.path.insert(0, '/home/customer/lib')
+
 import requests
 import pandas as pd
 import datetime as dt
 import io
+
+OUTPUT_DIRECTORY = os.path.join(os.pardir, "archivos")
 
 MEX_URL = 'https://datos.covid-19.conacyt.mx/Downloads/Files/Casos_Diarios_Municipio_Confirmados_{}.csv'
 CLAVES_ENTIDADES = {1: 'Aguascalientes', 2: 'Baja California', 3: 'Baja California Sur',
@@ -54,9 +62,10 @@ def get_mex_data():
                                                          values='nicv').reset_index()
     municipios = municipios[municipios['date'] >
                             dt.datetime.today() - dt.timedelta(days=367)]
-    municipios.to_csv('3-20-1-NICV-Municipios-México.csv', index=False)
-    print('Municipios')
-    print(municipios)
+    output_file_path = os.path.join(OUTPUT_DIRECTORY, '3-20-1-NICV-Municipios-México.csv')
+    municipios.to_csv(output_file_path, index=False)
+    # print('Municipios')
+    # print(municipios)
 
     # Calcular NICV para Estados
     states = mex.groupby(['state', 'date']).agg({'confirmed': 'sum',
@@ -73,9 +82,10 @@ def get_mex_data():
                                                      values='nicv').reset_index()
     states = states[states['date'] >
                     dt.datetime.today() - dt.timedelta(days=367)]
-    states.to_csv('3-1-NICV-Estados-México.csv', index=False)
-    print('Estados de Mexico')
-    print(states)
+    output_file_path = os.path.join(OUTPUT_DIRECTORY, '3-1-NICV-Estados-México.csv')
+    states.to_csv(output_file_path, index=False)
+    # print('Estados de Mexico')
+    # print(states)
 
 
 if __name__ == "__main__":

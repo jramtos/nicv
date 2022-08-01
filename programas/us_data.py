@@ -2,10 +2,18 @@
 
 # Author: Jesica Ramirez
 
+import os
+customer_lib_dir = '/home/customer/lib'
+if os.path.isdir(customer_lib_dir):
+    import sys
+    sys.path.insert(0, '/home/customer/lib')
+
 import requests
 import pandas as pd
 import datetime as dt
 import io
+
+OUTPUT_DIRECTORY = os.path.join(os.pardir, "archivos")
 
 url_county_us = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{}.csv"
 
@@ -63,9 +71,10 @@ def get_us_data():
     states = states.pivot(index='date', columns='State',
                           values='nicv').reset_index()
     states = states[states['date'] > end - dt.timedelta(days=369)]
-    states.to_csv('2-1-NICV-Estados-USA.csv', index=False)
-    print('Estados de USA')
-    print(states)
+    output_file_path = os.path.join(OUTPUT_DIRECTORY, '2-1-NICV-Estados-USA.csv')
+    states.to_csv(output_file_path, index=False)
+    # print('Estados de USA')
+    # print(states)
 
     # Counties
     big = big[big.County != 'Unassigned']
@@ -80,9 +89,10 @@ def get_us_data():
     counties = counties.pivot(
         index='date', columns='Combined_Key', values='nicv').reset_index()
     counties = counties[counties['date'] > end - dt.timedelta(days=369)]
-    counties.to_csv('2-1-NICV-Counties-USA.csv', index=False)
-    print('Counties de USA')
-    print(counties)
+    output_file_path = os.path.join(OUTPUT_DIRECTORY, '2-1-NICV-Counties-USA.csv')
+    counties.to_csv(output_file_path, index=False)
+    # print('Counties de USA')
+    # print(counties)
 
 
 if __name__ == "__main__":
