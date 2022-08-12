@@ -32,7 +32,7 @@ def pull_and_format_data():
 
     # Second File
     all_records_world_file = global_csv[['date', 'World']]
-    all_records_world_file.to_csv(os.path.join(OUTPUT_DIRECTORY, 'N-World-A.csv'),
+    all_records_world_file.to_csv(os.path.join(OUTPUT_DIRECTORY, '1-World/N-World-A.csv'),
                                   index=False)
 
     # Third File
