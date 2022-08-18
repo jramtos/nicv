@@ -27,7 +27,7 @@ def pull_and_format_data():
     # First File
     one_record_world_file = pd.DataFrame(
         global_csv[['date', 'World']].iloc[-1, :]).T
-    one_record_world_file.to_csv(os.path.join(OUTPUT_DIRECTORY, 'N-World-001.csv'),
+    one_record_world_file.to_csv(os.path.join(OUTPUT_DIRECTORY, '1-World/N-World-001.csv'),
                                  index=False)
 
     # Second File
@@ -69,7 +69,7 @@ def pull_and_format_data():
         all_countries_file = all_countries_transposed[cols_needed]
 
     all_countries_file.index.name = 'date'
-    all_countries_file.reset_index().to_csv(os.path.join(OUTPUT_DIRECTORY, 'World-V-Tabla.csv'),
+    all_countries_file.reset_index().to_csv(os.path.join(OUTPUT_DIRECTORY, '1-World/World-V-Tabla.csv'),
                                             index=False)
 
 
